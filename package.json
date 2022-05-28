@@ -9,7 +9,9 @@
   },
   "standard":{
     "env:": ["jest"]
+    
   },
+  "editor.formatOnSave": true,
   "author": "",
   "license": "ISC",
   "devDependencies": {
