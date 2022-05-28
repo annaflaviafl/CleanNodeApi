@@ -7,13 +7,18 @@ const makeSut = () => {
     auth (email, password) {
       this.email = email
       this.password = password
+      return this.acessToken
     }
   }
+
   const authUseCaseSpy = new AuthUseCaseSpy()
+  authUseCaseSpy.acessToken = 'Valid token'
+
   const sut = new LoginRouter(authUseCaseSpy)
 
   return { authUseCaseSpy, sut }
 }
+
 describe('Login Router', () => {
   test('Should return 400 if no email is provided', () => {
     const { sut } = makeSut()
@@ -63,13 +68,25 @@ describe('Login Router', () => {
   })
 
   test('Should return 401 when invalid credentials are provided', () => {
-    const { sut } = makeSut()
+    const { sut, authUseCaseSpy } = makeSut()
+    authUseCaseSpy.acessToken = null
+
     const httpRequest = {
       body: { email: 'invalid_email@mail.com', password: 'invalid_password' }
     }
     const httpResponse = sut.route(httpRequest)
     expect(httpResponse.statusCode).toBe(401)
     expect(httpResponse.body).toEqual(new UnauthorizedError('Unauthorized'))
+  })
+
+  test('Should return 200 when valid credentials are provided', () => {
+    const { sut } = makeSut()
+
+    const httpRequest = {
+      body: { email: 'valid_email@mail.com', password: 'valid_password' }
+    }
+    const httpResponse = sut.route(httpRequest)
+    expect(httpResponse.statusCode).toBe(200)
   })
 
   test('Should return 500 if no AuthUseCase is provided', () => {
