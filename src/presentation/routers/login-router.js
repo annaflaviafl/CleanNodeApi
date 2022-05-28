@@ -1,23 +1,23 @@
-const HttpResponse = require("../helpers/http-response");
+const HttpResponse = require('../helpers/http-response')
 
 module.exports = class LoginRouter {
-  constructor(authUseCase) {
-    this.authUseCase = authUseCase;
+  constructor (authUseCase) {
+    this.authUseCase = authUseCase
   }
 
-  route(httpRequest) {
+  route (httpRequest) {
     if (!httpRequest || !httpRequest.body) {
-      return HttpResponse.serverError();
+      return HttpResponse.serverError()
     }
-    const { email, password } = httpRequest.body;
+    const { email, password } = httpRequest.body
     if (!email) {
-      return HttpResponse.badResquest("email");
+      return HttpResponse.badResquest('email')
     }
     if (!password) {
-      return HttpResponse.badResquest("password");
+      return HttpResponse.badResquest('password')
     }
-    this.authUseCase.auth(email, password);
+    this.authUseCase.auth(email, password)
 
-    return HttpResponse.unauthorizedError();
+    return HttpResponse.unauthorizedError()
   }
-};
+}
