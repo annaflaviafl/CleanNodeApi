@@ -1,2 +1,4 @@
-export const coverageDirectory = "coverage";
-export const testEnvironment = "node";
+module.exports = {
+  coverageDirectory: "coverage",
+  testEnvironment: "node",
+};
