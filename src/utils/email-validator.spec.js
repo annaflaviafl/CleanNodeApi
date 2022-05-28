@@ -23,4 +23,11 @@ describe('Email validator', () => {
 
     expect(isEmailValid).toBe(false)
   })
+
+  test('Shold call validator with correct email', () => {
+    const sut = makeSut()
+    const isEmailValid = sut.isValid('any_email@mail.com')
+
+    expect(validator.email).toBe('any_email@mail.com')
+  })
 })
