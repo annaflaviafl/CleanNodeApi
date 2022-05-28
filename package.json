@@ -10,8 +10,10 @@
     "test:staged": "npm test -- --findRelatedTests",
     "test:ci": "npm test -- --coverage"
   },
-  "standard":{
-    "env:": ["jest"]  
+  "standard": {
+    "env:": [
+      "jest"
+    ]
   },
   "editor.formatOnSave": true,
   "author": "",
@@ -21,5 +23,8 @@
     "jest": "^28.1.0",
     "lint-staged": "^12.4.2",
     "standard": "^17.0.0"
+  },
+  "dependencies": {
+    "validator": "^13.7.0"
   }
 }
