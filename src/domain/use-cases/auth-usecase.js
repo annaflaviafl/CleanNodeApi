@@ -32,8 +32,6 @@ module.exports = class AuthUseCase {
     }
 
     const userToken = await this.tokenGenerator.generate(user.id)
-    if (!userToken) {
-      return userToken
-    }
+    return userToken
   }
 }
