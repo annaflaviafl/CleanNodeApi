@@ -9,7 +9,7 @@ class TokenGenerator {
     if (!this.secret) {
       throw new MissingParamError('secret')
     }
-    if (!this.id) {
+    if (!id) {
       throw new MissingParamError('id')
     }
     return jwt.sign(id, this.secret)
