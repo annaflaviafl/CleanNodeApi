@@ -20,4 +20,12 @@ describe('', () => {
 
     expect(isValid).toBeFalsy()
   })
+
+  test('Should cally bcrypt with correct value', async () => {
+    const sut = new Encrypter()
+    await sut.compare('any_value', 'hashed_value')
+
+    expect(bcrypt.value).toBe('any_value')
+    expect(bcrypt.hash).toBe('hashed_value')
+  })
 })
