@@ -19,6 +19,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@shelf/jest-mongodb": "^2.2.2",
     "husky": "^8.0.1",
     "jest": "^28.1.0",
     "lint-staged": "^12.4.2",
@@ -27,6 +28,7 @@
   "dependencies": {
     "bcrypt": "^5.0.1",
     "jsonwebtoken": "^8.5.1",
+    "mongodb": "^4.6.0",
     "validator": "^13.7.0"
   }
 }
