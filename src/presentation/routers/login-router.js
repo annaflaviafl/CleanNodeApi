@@ -1,30 +1,30 @@
-const HttpResponse = require('../helpers/http-response')
-const { MissingParamError, InvalidParamError } = require('../../utils/errors')
+const HttpResponse = require("../helpers/http-response");
+const { MissingParamError, InvalidParamError } = require("../../utils/errors");
 module.exports = class LoginRouter {
-  constructor (authUseCase, emailValidator) {
-    this.authUseCase = authUseCase
-    this.emailValidator = emailValidator
+  constructor({ authUseCase, emailValidator } = {}) {
+    this.authUseCase = authUseCase;
+    this.emailValidator = emailValidator;
   }
 
-  async route (httpRequest) {
+  async route(httpRequest) {
     try {
-      const { email, password } = httpRequest.body
+      const { email, password } = httpRequest.body;
       if (!email) {
-        return HttpResponse.badResquest(new MissingParamError('email'))
+        return HttpResponse.badResquest(new MissingParamError("email"));
       }
       if (!this.emailValidator.isValid(email)) {
-        return HttpResponse.badResquest(new InvalidParamError('email'))
+        return HttpResponse.badResquest(new InvalidParamError("email"));
       }
       if (!password) {
-        return HttpResponse.badResquest(new MissingParamError('password'))
+        return HttpResponse.badResquest(new MissingParamError("password"));
       }
-      const acessToken = await this.authUseCase.auth(email, password)
+      const acessToken = await this.authUseCase.auth(email, password);
       if (!acessToken) {
-        return HttpResponse.unauthorizedError()
+        return HttpResponse.unauthorizedError();
       }
-      return HttpResponse.ok({ acessToken })
+      return HttpResponse.ok({ acessToken });
     } catch (error) {
-      return HttpResponse.serverError()
+      return HttpResponse.serverError();
     }
   }
-}
+};
