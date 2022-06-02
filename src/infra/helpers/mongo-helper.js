@@ -13,5 +13,14 @@ module.exports = {
 
   async disconnect() {
     await this.client.close();
+    this.client = null;
+    this.db = null;
+  },
+
+  async getCollection(name) {
+    if (!this.client || !this.client.isConnect) {
+      await this.connect(this.uri, this.dbName);
+    }
+    return this.db.collection(name);
   },
 };
